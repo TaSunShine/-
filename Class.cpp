@@ -2,42 +2,38 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-// include´Â Çì´õ¿¡ ÁöÁ¤ÇßÀ¸¸é ¿©±â´Â ¾È ÇØµµ µÈ´Ù.
-// ±×·¡¼­ iostream¸¸Àº Çì´õ¿¡¼­µµ »ç¿ëÇÏ¹Ç·Î Çì´õÆÄÀÏ¿¡ ³öµÎ°í ³ª¸ÓÁö´Â ¼Ò½ºÆÄÀÏ¿¡¼­ ºÒ·¯º¸¾Ò´Ù.
-
-// 16¹ø°ú 17¹øÀº ÁÖ¼® ¸ðµÎ ´Þ¶ó´Â ÀÇµµ : ÄÚµå¸¦ ÀÌÇØÇß´Â°¡, 
-// ÄÁ´×¸¸À¸·Î Á¦ÃâÇÑ °ÍÀº ¾Æ´Ñ°¡ È®ÀÎÇÏ·Á´Â ÀÇµµ·Î »ý°¢ÇØ¼­
-// ±âº»ÀûÀÎ ºÎºÐµéÀº ÁÖ¼® ¾È´Þ¾Ò½À´Ï´Ù!!!!!!!!!!!!!
+// includeëŠ” í—¤ë”ì— ì§€ì •í–ˆìœ¼ë©´ ì—¬ê¸°ëŠ” ì•ˆ í•´ë„ ëœë‹¤.
+// ê·¸ëž˜ì„œ iostreamë§Œì€ í—¤ë”ì—ì„œë„ ì‚¬ìš©í•˜ë¯€ë¡œ í—¤ë”íŒŒì¼ì— ë†”ë‘ê³  ë‚˜ë¨¸ì§€ëŠ” ì†ŒìŠ¤íŒŒì¼ì—ì„œ ë¶ˆëŸ¬ë³´ì•˜ë‹¤.
 
 
 static char  cardDenomination[] = { 'A','2','3','4','5','6','7','8','9','T','J','Q','K' };
 static char  cardPattern[] = { 'S','H','C','D' };
-// À§ÀÇ 2°³´Â °¢°¢ ¹®¾ç(ºí·¢Àè¿¡¼± ÀÇ¹Ì°¡ ¾ø°í ´Ü¼øÈ÷ Ä«µå ±¸ºÐÇÏ´Â ¿ëµµÀÎµí), ¼ýÀÚ¸¦ ÀÇ¹ÌÇÏ¸ç ¼­·Î´Ù¸¥ ¹®¾ç°ú ¼ýÀÚ°¡ ¸ð¿©
-// ¿ì¸®°¡ ¾Æ´Â Æ®·³ÇÁÄ«µå°¡ µÈ´Ù.
+// ìœ„ì˜ 2ê°œëŠ” ê°ê° ë¬¸ì–‘(ë¸”ëž™ìž­ì—ì„  ì˜ë¯¸ê°€ ì—†ê³  ë‹¨ìˆœížˆ ì¹´ë“œ êµ¬ë¶„í•˜ëŠ” ìš©ë„ì¸ë“¯), ìˆ«ìžë¥¼ ì˜ë¯¸í•˜ë©° ì„œë¡œë‹¤ë¥¸ ë¬¸ì–‘ê³¼ ìˆ«ìžê°€ ëª¨ì—¬
+// ìš°ë¦¬ê°€ ì•„ëŠ” íŠ¸ëŸ¼í”„ì¹´ë“œê°€ ëœë‹¤.
 
 
-vector<Card> allCards, dealCards, userCards; // ÀüÃ¼Ä«µå¿Í µô·¯ÀÇÄ«µå,À¯ÀúÀÇ Ä«µå´Â ¸ðµÎ ¿¬°üµÇ¾îÀÖ±â¿¡ Àü¿ªº¯¼ö·Î½á ÄÁÆ®·ÑÇÑ´Ù.
+vector<Card> allCards, dealCards, userCards; // ì „ì²´ì¹´ë“œì™€ ë”œëŸ¬ì˜ì¹´ë“œ,ìœ ì €ì˜ ì¹´ë“œëŠ” ëª¨ë‘ ì—°ê´€ë˜ì–´ìžˆê¸°ì— ì „ì—­ë³€ìˆ˜ë¡œì¨ ì»¨íŠ¸ë¡¤í•œë‹¤.
 
-int dealWin = 0, userWin = 0; //ÃÊ±âÈ­´Â ½Â¸®È½¼ö¸¦ ÃÊ±âÈ­.
+int dealWin = 0, userWin = 0; //ì´ˆê¸°í™”ëŠ” ìŠ¹ë¦¬íšŸìˆ˜ë¥¼ ì´ˆê¸°í™”.
 
-// Ä«µå ÃÊ±âÈ­
+// ì¹´ë“œ ì´ˆê¸°í™”
 void initSetting();
-// Ä«µå ¹Þ±â
+// ì¹´ë“œ ë°›ê¸°
 void receiveCard(char);
-//½Â·ü
+//ìŠ¹ë¥ 
 int Winrate(int, int);
-// HIT¿©ºÎ È®ÀÎ
+// HITì—¬ë¶€ í™•ì¸
 bool hit();
-// Á¡¼ö °è»ê
+// ì ìˆ˜ ê³„ì‚°
 int computeScore(vector<Card>);
-// ½ÂÀÚ¿©ºÎ °áÁ¤
+// ìŠ¹ìžì—¬ë¶€ ê²°ì •
 void decideWinner();
-// °ÔÀÓ ´Ù½ÃÇÏ±â ¿©ºÎ È®ÀÎ
+// ê²Œìž„ ë‹¤ì‹œí•˜ê¸° ì—¬ë¶€ í™•ì¸
 bool gameAgain();
-// ±ÔÄ¢ ¼³¸í
+// ê·œì¹™ ì„¤ëª…
 void Rule();
 
-void initSetting() { //ÃÊ±âÈ­´Â º¤ÅÍ¸¦ ÅëÇØ¼­ ÁøÇàµÇ¸ç ¸ðµç Ä«µå¸¦ allCards¶ó´Â º¤ÅÍ¼ÓÀ¸·Î ³Ö¾î¹ö¸®´Â °ÍÀÌ ÃÊ±âÈ­¸¦ ÀÇ¹ÌÇÑ´Ù.
+void initSetting() { //ì´ˆê¸°í™”ëŠ” ë²¡í„°ë¥¼ í†µí•´ì„œ ì§„í–‰ë˜ë©° ëª¨ë“  ì¹´ë“œë¥¼ allCardsë¼ëŠ” ë²¡í„°ì†ìœ¼ë¡œ ë„£ì–´ë²„ë¦¬ëŠ” ê²ƒì´ ì´ˆê¸°í™”ë¥¼ ì˜ë¯¸í•œë‹¤.
 	for (int i = 0; i < sizeof(cardPattern) / sizeof(char); i++) {
 		for (int j = 0; j < sizeof(cardDenomination) / sizeof(char); j++) {
 			allCards.push_back(Card(cardPattern[i], cardDenomination[j]));
@@ -45,36 +41,36 @@ void initSetting() { //ÃÊ±âÈ­´Â º¤ÅÍ¸¦ ÅëÇØ¼­ ÁøÇàµÇ¸ç ¸ðµç Ä«µå¸¦ allCards¶ó´Â 
 	}
 }
 void Rule() {
-	//´Ü¼øÇÑ ·ê ¼³¸í, ÇÊ¿äÇÒ °æ¿ì r¸¦ ÅëÇØ È£ÃâµÇ¹Ç·Î ¸Þ¼Òµå·Î »©¹ö·È´Ù.
-	cout << "µô·¯¿ÍÀÇ ºí·¢ÀèÀ» ½ÃÀÛÇÕ´Ï´Ù. ±ÔÄ¢Àº ´ÙÀ½°ú °°½À´Ï´Ù." << endl << endl <<
-		"1. °¡Áø Ä«µåÀÇ ÇÕÀÌ 22ÀÌ»óÀÌ µÇ¸é ÆÐ¹èÇÕ´Ï´Ù." << endl <<
-		"2. S´Â ½ºÆäÀÌµå, H´Â ÇÏÆ®, C´Â Å¬·Î¹ö, D´Â ´ÙÀÌ¾Æ¸óµåÀÔ´Ï´Ù." << endl <<
-		"3. T,J,K,Q´Â ¸ðµÎ 10ÀÇ °ªÀ» °®½À´Ï´Ù." << endl <<
-		"4. A´Â ÀÏ¹ÝÀûÀ¸·Ð °ªÀÌ 1 ÀÌÁö¸¸ ÀÚ½ÅÀÌ °¡Áø Ä«µåÀÇ ÇÕÀÌ 11º¸´Ù Å¬ °æ¿ì´Â 11ÀÇ °ªÀ» °®½À´Ï´Ù." << endl <<
-		"5. Hit¸¦ ±×¸¸µÑ ¶§ µô·¯¿Í Á¡¼ö°¡ Àû°Å³ª °°À¸¸é ÆÐ¹èÇÕ´Ï´Ù." << endl <<
-		"   ÇØ´ç ¼³¸íÀ» ´Ù½Ã º¸°í ½ÍÀ¸½Ã¸é RÀ» ÀÔ·ÂÇÏ½Ã¸é µË´Ï´Ù. " 
+	//ë‹¨ìˆœí•œ ë£° ì„¤ëª…, í•„ìš”í•  ê²½ìš° rë¥¼ í†µí•´ í˜¸ì¶œë˜ë¯€ë¡œ ë©”ì†Œë“œë¡œ ë¹¼ë²„ë ¸ë‹¤.
+	cout << "ë”œëŸ¬ì™€ì˜ ë¸”ëž™ìž­ì„ ì‹œìž‘í•©ë‹ˆë‹¤. ê·œì¹™ì€ ë‹¤ìŒê³¼ ê°™ìŠµë‹ˆë‹¤." << endl << endl <<
+		"1. ê°€ì§„ ì¹´ë“œì˜ í•©ì´ 22ì´ìƒì´ ë˜ë©´ íŒ¨ë°°í•©ë‹ˆë‹¤." << endl <<
+		"2. SëŠ” ìŠ¤íŽ˜ì´ë“œ, HëŠ” í•˜íŠ¸, CëŠ” í´ë¡œë²„, DëŠ” ë‹¤ì´ì•„ëª¬ë“œìž…ë‹ˆë‹¤." << endl <<
+		"3. T,J,K,QëŠ” ëª¨ë‘ 10ì˜ ê°’ì„ ê°–ìŠµë‹ˆë‹¤." << endl <<
+		"4. AëŠ” ì¼ë°˜ì ìœ¼ë¡  ê°’ì´ 1 ì´ì§€ë§Œ ìžì‹ ì´ ê°€ì§„ ì¹´ë“œì˜ í•©ì´ 11ë³´ë‹¤ í´ ê²½ìš°ëŠ” 11ì˜ ê°’ì„ ê°–ìŠµë‹ˆë‹¤." << endl <<
+		"5. Hitë¥¼ ê·¸ë§Œë‘˜ ë•Œ ë”œëŸ¬ì™€ ì ìˆ˜ê°€ ì ê±°ë‚˜ ê°™ìœ¼ë©´ íŒ¨ë°°í•©ë‹ˆë‹¤." << endl <<
+		"   í•´ë‹¹ ì„¤ëª…ì„ ë‹¤ì‹œ ë³´ê³  ì‹¶ìœ¼ì‹œë©´ Rì„ ìž…ë ¥í•˜ì‹œë©´ ë©ë‹ˆë‹¤. " 
 		<< endl << endl;
 
 }
 
 
-// Ä«µå ¹Þ±â
+// ì¹´ë“œ ë°›ê¸°
 void receiveCard(char du) {
 	int num = rand() % allCards.size();
-	// ÀÓÀÇÄ«µå ÇÑ Àå ¼±ÅÃ
+	// ìž„ì˜ì¹´ë“œ í•œ ìž¥ ì„ íƒ
 	Card card = (Card)allCards[num];
-	// ¼±ÅÃµÈ Ä«µå »èÁ¦
+	// ì„ íƒëœ ì¹´ë“œ ì‚­ì œ
 	allCards.erase(allCards.begin() + num);
-	// µô·¯ ¶Ç´Â À¯Àú Card¸®½ºÆ®¿¡ Ãß°¡
+	// ë”œëŸ¬ ë˜ëŠ” ìœ ì € Cardë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
 	if (du == 'd')		dealCards.push_back(card);
 	else if (du == 'u')		userCards.push_back(card);
 }
 
-// hit ¿©ºÎ
+// hit ì—¬ë¶€
 bool hit() {
-	// Á» ´õ Æ¯º°ÇÏ°Ô ¸¸µé¾ú´Ù.
-    // ¹®¾ç°ú ¼ýÀÚ¸¦ º¸°í Á¡¼ö±¸ºÐÀÌ ¾î·Æ±â¿¡ 
-	// ¾Æ¿¹ Á¡¼ö¸¦ ÀÌ ¶§ ¾Ë·ÁÁÖ°í, ÇÊ¿äÇÒ °æ¿ì ·êÀ» ´Ù½Ã È£ÃâÇØ¼­ ±ÔÄ¢À» ÀÐÀ» ¼ö ÀÖ°Ô ¸¸µé¾ú´Ù.
+	// ì¢€ ë” íŠ¹ë³„í•˜ê²Œ ë§Œë“¤ì—ˆë‹¤.
+    // ë¬¸ì–‘ê³¼ ìˆ«ìžë¥¼ ë³´ê³  ì ìˆ˜êµ¬ë¶„ì´ ì–´ë µê¸°ì— 
+	// ì•„ì˜ˆ ì ìˆ˜ë¥¼ ì´ ë•Œ ì•Œë ¤ì£¼ê³ , í•„ìš”í•  ê²½ìš° ë£°ì„ ë‹¤ì‹œ í˜¸ì¶œí•´ì„œ ê·œì¹™ì„ ì½ì„ ìˆ˜ ìžˆê²Œ ë§Œë“¤ì—ˆë‹¤.
 	char input = 'N';
 
 	cout << " Now Cards Score : " << computeScore(userCards) << "\n";
@@ -91,9 +87,9 @@ bool hit() {
 		
 		else return false;
 }
-// ½Â·ü °è»ê
+// ìŠ¹ë¥  ê³„ì‚°
 int Winrate(int  user, int deal) {
-	// ´Ü¼øÈ÷ ½Â·ü¸¸À» °è»êÇÏ¸é µÇ¹Ç·Î ±×³É ¸Þ¼Òµå·Î »©¹ö·È´Ù.
+	// ë‹¨ìˆœížˆ ìŠ¹ë¥ ë§Œì„ ê³„ì‚°í•˜ë©´ ë˜ë¯€ë¡œ ê·¸ëƒ¥ ë©”ì†Œë“œë¡œ ë¹¼ë²„ë ¸ë‹¤.
 	int Result = 0;
 	if (user == 0) {
 		return 0;
@@ -103,14 +99,14 @@ int Winrate(int  user, int deal) {
 		return Result;
 	}
 }
-// Á¡¼ö°è»ê
+// ì ìˆ˜ê³„ì‚°
 int computeScore(vector<Card> cards) {
-	int score = 0; // nameÀº Denomination numAce´Â A¸¸À» ´ë»óÀ¸·Î ÇÏ´Â º¯¼ö
+	int score = 0; // nameì€ Denomination numAceëŠ” Aë§Œì„ ëŒ€ìƒìœ¼ë¡œ í•˜ëŠ” ë³€ìˆ˜
 	int numAce = 0;
 	for (int i = 0; i < cards.size(); i++) {
-		// cards.size¶óÇÔÀº Å©±â¸¦ ÀÇ¹ÌÇÏ¹Ç·Î º¸À¯ÁßÀÎ Ä«µå°¡ 1°³, 2°³¿©µµ 1°³ 2°³¸¸Å­À» °è»êÇÏ´Â ÇüÅÂ¸¦ ¶ê.
-		// ±×·¸°Ô DeniminationÀº ¼ýÀÚ ±×´ë·Î ´õÇÏ°í (TÀÌÈÄ°ªÀº ¸ðµÎ 10) Æ¯º°ÇÑ A¸¸Àº
-		// º»ÀÎÀ» Á¦¿ÜÇÑ ¼öµéÀÌ 11ÀÌ»óÀÏ °æ¿ì´Â 11, ±×·¸Áö ¾ÊÀ» °æ¿ì´Â 1·Î Ãë±ÞÇÏ¿© °è»ê.
+		// cards.sizeë¼í•¨ì€ í¬ê¸°ë¥¼ ì˜ë¯¸í•˜ë¯€ë¡œ ë³´ìœ ì¤‘ì¸ ì¹´ë“œê°€ 1ê°œ, 2ê°œì—¬ë„ 1ê°œ 2ê°œë§Œí¼ì„ ê³„ì‚°í•˜ëŠ” í˜•íƒœë¥¼ ë”.
+		// ê·¸ë ‡ê²Œ Deniminationì€ ìˆ«ìž ê·¸ëŒ€ë¡œ ë”í•˜ê³  (Tì´í›„ê°’ì€ ëª¨ë‘ 10) íŠ¹ë³„í•œ Aë§Œì€
+		// ë³¸ì¸ì„ ì œì™¸í•œ ìˆ˜ë“¤ì´ 11ì´ìƒì¼ ê²½ìš°ëŠ” 11, ê·¸ë ‡ì§€ ì•Šì„ ê²½ìš°ëŠ” 1ë¡œ ì·¨ê¸‰í•˜ì—¬ ê³„ì‚°.
 
 		Card card = (Card)cards[i];
 		char name = card.getDenomination();
@@ -120,7 +116,7 @@ int computeScore(vector<Card> cards) {
 			score += 10;
 		else score += name - '0';
 	}
-	// Á¡¼ö°è»ê
+	// ì ìˆ˜ê³„ì‚°
 	for (int i = 0; i < numAce; i++) {
 		if (score < 11) score += 11;
 		else score += 1;
@@ -129,16 +125,16 @@ int computeScore(vector<Card> cards) {
 	return score;
 }
 
-// ½ÂÀÚ ÆÇ´Ü
+// ìŠ¹ìž íŒë‹¨
 void decideWinner() {
 
 	int user = computeScore(userCards);
 	int deal = computeScore(dealCards);
-	//ÇØ´ç ¸Þ¼Òµå¿¡¼­´Â compiteScore¸¦ ÅëÇØ µµÃâµÈ °ªÀ» user,deal Áö¿ªº¯¼ö·Î½á ÆÇ´ÜÇÕ´Ï´Ù.
+	//í•´ë‹¹ ë©”ì†Œë“œì—ì„œëŠ” compiteScoreë¥¼ í†µí•´ ë„ì¶œëœ ê°’ì„ user,deal ì§€ì—­ë³€ìˆ˜ë¡œì¨ íŒë‹¨í•©ë‹ˆë‹¤.
 
 
 	if ( user > 21 || (deal <= 21 && user <= deal)) {
-        // Á¡¼ö°¡ 21Á¡À» ³Ñ¾î°¡°Å³ª, À¯Àú°¡ µô·¯º¸´Ù °°°Å³ª ÀûÀº°æ¿ì ÆÐ¹èÃ³¸®ÇÏ´Â ½Ä
+        // ì ìˆ˜ê°€ 21ì ì„ ë„˜ì–´ê°€ê±°ë‚˜, ìœ ì €ê°€ ë”œëŸ¬ë³´ë‹¤ ê°™ê±°ë‚˜ ì ì€ê²½ìš° íŒ¨ë°°ì²˜ë¦¬í•˜ëŠ” ì‹
 		dealWin++;
 		cout << "DEALER WIN!" << endl;
 	}
@@ -151,14 +147,14 @@ void decideWinner() {
 	cout << "USER Score: " << user << endl;
 }
 
-// ÇÑ °ÔÀÓ ´õ È®ÀÎ
+// í•œ ê²Œìž„ ë” í™•ì¸
 bool gameAgain() {
 	char again = 'N';
 	cout << "GAME AGAIN ? ( Y / N ) : ";
 	cin >> again;
 	cout << endl;
 	if (again == 'Y' || again == 'y') {
-		// ¸ðµç Ä«µå¸¦ ÃÊ±âÈ­.
+		// ëª¨ë“  ì¹´ë“œë¥¼ ì´ˆê¸°í™”.
 		allCards.clear();
 		dealCards.clear();
 		userCards.clear();
@@ -168,24 +164,24 @@ bool gameAgain() {
 }
 
 int main() {
-	srand(time(NULL)); // ½ÇÇà½Ã ·£´ý ½Ãµå°ª ¼³Á¤ÇÏ´Â ´À³¦
+	srand(time(NULL)); // ì‹¤í–‰ì‹œ ëžœë¤ ì‹œë“œê°’ ì„¤ì •í•˜ëŠ” ëŠë‚Œ
 	
 	Rule();
 
 	do {
 		//vector<Card> allCards;
 		initSetting();
-		// dealer ´Â µÎ Àå ¹Þ±â
+		// dealer ëŠ” ë‘ ìž¥ ë°›ê¸°
 		receiveCard('d');
 		receiveCard('d');
 		receiveCard('u');
 
-		// user°¡ hit ¿©ºÎ¿¡ nÀ» ÀÔ·ÂÇÒ ¶§ ±îÁö
+		// userê°€ hit ì—¬ë¶€ì— nì„ ìž…ë ¥í•  ë•Œ ê¹Œì§€
 		do {
 			if (userCards.size() >= 4) {
-				cout << "Ä«µå¸¦ 5°³ ÀÌ»ó º¸À¯ÇÏ¿© ÀÚµ¿À¸·Î ÆÐ¹èÇÕ´Ï´Ù." << endl << endl;
+				cout << "ì¹´ë“œë¥¼ 5ê°œ ì´ìƒ ë³´ìœ í•˜ì—¬ ìžë™ìœ¼ë¡œ íŒ¨ë°°í•©ë‹ˆë‹¤." << endl << endl;
 				dealWin++;
-				initSetting(); //ÆÐ¹è Ã³¸® ÈÄ ÃÊ±âÈ­
+				initSetting(); //íŒ¨ë°° ì²˜ë¦¬ í›„ ì´ˆê¸°í™”
 				break;
 				
 			}
@@ -193,36 +189,36 @@ int main() {
 			receiveCard('u');
 			
 			if (computeScore(userCards) > 21) {
-				cout << "22Á¡ ÀÌ»óÀÌ µÇ¾ú½À´Ï´Ù. ÀÚµ¿À¸·Î ÆÐ¹èÇÕ´Ï´Ù." << endl << endl;
+				cout << "22ì  ì´ìƒì´ ë˜ì—ˆìŠµë‹ˆë‹¤. ìžë™ìœ¼ë¡œ íŒ¨ë°°í•©ë‹ˆë‹¤." << endl << endl;
 				dealWin++;
-				initSetting(); //ÆÐ¹è Ã³¸® ÈÄ ÃÊ±âÈ­
+				initSetting(); //íŒ¨ë°° ì²˜ë¦¬ í›„ ì´ˆê¸°í™”
 				break;
 			}
 
-			cout << " ´ç½ÅÀÇ Ä«µå : ";
+			cout << " ë‹¹ì‹ ì˜ ì¹´ë“œ : ";
 			for (auto iter : userCards) cout << iter.getPattern() << iter.getDenomination() << "  ";
 			cout << endl;
 			
 			
-			// dealerÀÇ Ä«µå °ªÀÌ 17¹Ì¸¸ÀÌ¸é dealer Ä«µå ¹Þ±â
+			// dealerì˜ ì¹´ë“œ ê°’ì´ 17ë¯¸ë§Œì´ë©´ dealer ì¹´ë“œ ë°›ê¸°
 			if (computeScore(dealCards) < 17) receiveCard('d');
-		} while (hit()); // hit()ÇÔ¼ö¿¡¼­ false¸¦ ¸®ÅÏÇÒ ¶§±îÁö ¹Ýº¹
+		} while (hit()); // hit()í•¨ìˆ˜ì—ì„œ falseë¥¼ ë¦¬í„´í•  ë•Œê¹Œì§€ ë°˜ë³µ
 
-		// ½ÂÀÚ ÆÇ´Ü
+		// ìŠ¹ìž íŒë‹¨
 		decideWinner();
 
-		cout << "µô·¯ÀÇ Ä«µå : ";
+		cout << "ë”œëŸ¬ì˜ ì¹´ë“œ : ";
 		for (auto iter : dealCards) cout << iter.getPattern() << iter.getDenomination() << "  ";
 		cout << endl;
-		cout << "´ç½ÅÀÇ Ä«µå : ";
+		cout << "ë‹¹ì‹ ì˜ ì¹´ë“œ : ";
 		for (auto iter : userCards) cout << iter.getPattern() << iter.getDenomination() << "  ";
 		cout << endl << endl;
-		cout << "ÇöÀç±îÁö ´ç½ÅÀÇ ½Â¸®È½¼ö : " << userWin <<
-			"\n µô·¯ÀÇ ½Â¸® È½¼ö : " << dealWin <<
-			"\n" << "ÇöÀç ´ç½ÅÀÇ ½Â·ü : " << Winrate(userWin,dealWin) << "%" <<
+		cout << "í˜„ìž¬ê¹Œì§€ ë‹¹ì‹ ì˜ ìŠ¹ë¦¬íšŸìˆ˜ : " << userWin <<
+			"\n ë”œëŸ¬ì˜ ìŠ¹ë¦¬ íšŸìˆ˜ : " << dealWin <<
+			"\n" << "í˜„ìž¬ ë‹¹ì‹ ì˜ ìŠ¹ë¥  : " << Winrate(userWin,dealWin) << "%" <<
 			"\n" ;
-		// ½ÂÀÚ ÆÇ´Ü ÈÄ, µô·¯¿Í ÀÚ½ÅÀÇ Ä«µå¸¦ º¸¿©ÁÖ¸é¼­
-		// ÇöÀç±îÁö ½Â¸®È½¼ö¸¦ Ãâ·ÂÇÏ°í µô·¯¿ÍÀÇ ½Â·üÀ» º¸¿©ÁÖ¾îº¸¾Ò´Ù.
+		// ìŠ¹ìž íŒë‹¨ í›„, ë”œëŸ¬ì™€ ìžì‹ ì˜ ì¹´ë“œë¥¼ ë³´ì—¬ì£¼ë©´ì„œ
+		// í˜„ìž¬ê¹Œì§€ ìŠ¹ë¦¬íšŸìˆ˜ë¥¼ ì¶œë ¥í•˜ê³  ë”œëŸ¬ì™€ì˜ ìŠ¹ë¥ ì„ ë³´ì—¬ì£¼ì–´ë³´ì•˜ë‹¤.
 	
  	
 	} while (gameAgain());
